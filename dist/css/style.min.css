@@ -1,1 +1,0 @@
-body{margin:0;background-color:#42001d}.container{width:1920px}.menu{display:flex;flex-direction:row;justify-content:space-between;justify-self:center;align-items:center;position:relative}.menu__logo{display:flex;flex-direction:row;align-items:center;gap:15px}.menu::after{content:"";height:1px;width:100%;background-color:#000;position:absolute;bottom:0}

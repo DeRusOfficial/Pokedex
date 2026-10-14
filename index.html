@@ -4,13 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./sass/styles.scss">
+
+    <link rel="stylesheet" href="./styles/variables/variables.css">
+    <link rel="stylesheet" href="./styles/header/header.css">
+    <link rel="stylesheet" href="./styles/main/main.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/logo/logo.png">
     <title>Pokedex</title>
 </head>
 
 <body>
-    <header class="menu container">
+    <header class="menu">
         <div class="menu__logo">
             <div class="menu__logo_img">
                 <img src="./assets/icons/favicon/favicon-32x32.png" alt="Pokedex">
@@ -18,8 +23,24 @@
             <h1 class="menu__logo_text">Pokedex</h1>
         </div>
 
-        <input type="text" placeholder="Search..." class="menu__input">
+        <input data-id="search-input" type="text" placeholder="Search..." class="menu__input">
     </header>
+
+    <main data-id="content" class="main-content">
+        <button data-id="card" class="pkm-card">
+            <div class="header">
+                <span>#1</span>
+                <h2>Pokemon</h2>
+            </div>
+            <div class="types">
+                <div class="type-name">grass</div>
+                <div class="type-name">poison</div>
+            </div>
+            <div class="pkm-img">
+                <img src="./assets/icons/logo/logo.png" alt="pkm_IMG">
+            </div>
+        </button>
+    </main>
 
 </body>
 

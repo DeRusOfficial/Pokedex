@@ -14,7 +14,7 @@
     <title>Pokedex</title>
 </head>
 
-<body>
+<body onload="init()">
     <header class="menu">
         <div class="menu__logo">
             <div class="menu__logo_img">
@@ -28,22 +28,29 @@
         </div>
     </header>
 
-    <main data-id="content" class="main-content">
-        <button data-id="card" class="pkm-card">
-            <div class="header">
-                <span>#1</span>
-                <h2>Pokemon</h2>
+    <main data-id="content" class="content">
+        <!-- <button data-id="card" class="pkm-card">
+            <div class="pkm-card__header">
+                <span class="pkm-card__header_num">#1</span>
+                <h2 class="pkm-card__header_name">Pokemon</h2>
             </div>
-            <div class="types">
-                <div class="type-name">grass</div>
-                <div class="type-name">poison</div>
+            <div class="pkm-card__types">
+                <div class="pkm-card__types_details">
+                    <div class="pkm-card__types_details-name">grass</div>
+                    <img class="pkm-card__types_details-icon" src="./assets/icons/types/bug.svg" alt="type-icon">
+                </div>
+                <div class="pkm-card__types_details">
+                    <div class="pkm-card__types_details-name">poison</div>
+                    <img class="pkm-card__types_details-icon" src="./assets/icons/types/poison.svg" alt="type-icon">
+                </div>
             </div>
-            <div class="pkm-img">
+            <div class="pkm-card__img">
                 <img src="./assets/icons/logo/logo.png" alt="pkm_IMG">
             </div>
-        </button>
+        </button> -->
     </main>
 
 </body>
-
+    <script src="./js/template.js"></script>
+    <script src="./js/script.js"></script>
 </html>

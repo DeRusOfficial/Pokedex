@@ -1,13 +1,13 @@
-async function loadCard(currentPkm) {
+async function loadCard(currentNum) {
     // let responseToJson = await fetchPkmAPI(startNum);
-    await loadToLocalStorage(currentPkm);
+    let pokemon = JSON.parse(localStorage.listOfPkms)
     return `
             <button data-id="card" class="pkm-card">
                 <div class="pkm-card__header">
-                    <span class="pkm-card__header_num">${responseToJson.id}</span>
-                    <h2 class="pkm-card__header_name">${responseToJson.name}</h2>
+                    <span class="pkm-card__header_num">#${pokemon.pokemon[currentNum].id}</span>
+                    <h2 class="pkm-card__header_name">${pokemon.pokemon[currentNum].name}</h2>
                 </div>
-                <div id="pkm-card__types-${startNum}" class="pkm-card__types" onload="${loadTypesOfPkm(startNum)}">
+                <div id="pkm-card__types-${currentNum}" class="pkm-card__types">
                     
                 </div>
                 <div class="pkm-card__img">

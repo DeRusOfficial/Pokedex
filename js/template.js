@@ -1,4 +1,4 @@
-async function loadCard(currentNum) {
+function loadCard(currentNum) {
     // let responseToJson = await fetchPkmAPI(startNum);
     let pokemon = JSON.parse(localStorage.listOfPkms)
     return `

@@ -16,8 +16,7 @@ function init() {
 async function render(currentNum) {
         await getCurrentPkmDetails(currentNum);
         loadToLocalStorage();
-        content.innerHTML += loadCard(currentNum);
-
+        loadCard(currentNum);
 }
 
 async function loadToLocalStorage() {
@@ -37,6 +36,7 @@ async function getCurrentPkmDetails(currentNum) {
         "height": await responseToJson.height,
         "weight": await responseToJson.weight,
         "bgColor": await responseToJson.types[0].type.name,
+        "img" : await getPkmImg(currentNum),
     }
     return currentPkmDetails
 }
@@ -58,6 +58,11 @@ async function getAbilitiesOfPkm(currentNum) {
     }
     return arrOfPkmAbilities
 } 
+
+async function getPkmImg(currentNum) {
+    let pkmImg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentNum}.svg`;
+    return pkmImg
+}
 
 
 

@@ -1,3 +1,76 @@
 :root {
     --bg-color: #42001d;
 }
+
+/* bg-color of pkmCards */
+.grass {
+    background-color: #00ad09
+}
+
+.fire {
+    background-color: #da5000
+}
+
+.water {
+    background-color: #0190c9
+}
+
+.bug {
+    background-color: #f80c66
+}
+
+.normal {
+    background-color: #3cad96
+}
+
+.poison {
+    background-color: #004d0d
+}
+
+.electric {
+    background-color: #d9dd00
+}
+
+.ground {
+    background-color: #572e00
+}
+
+.fairy {
+    background-color: #c7008b
+}
+
+.ice {
+    background-color: #73c4ca
+}
+
+.rock {
+    background-color: #636363
+}
+
+.fighting {
+    background-color: #9e0000
+}
+
+.flying {
+    background-color: #0093ad
+}
+
+.psychic {
+    background-color: #6200a3
+}
+
+.dark {
+    background-color: #202020
+}
+
+.steel {
+    background-color: #505050
+}
+
+.dragon {
+    background-color: #008612
+}
+
+.ghost {
+    background-color: #5a7e7e
+}

@@ -1,8 +1,9 @@
+const dialogRef = document.querySelector('[data-id="dialog"]');
+
 function loadCard(currentNum) {
-    // let responseToJson = await fetchPkmAPI(startNum);
-    let pokemon = JSON.parse(localStorage.listOfPkms)
-    content.innerHTML +=  `
-            <button data-id="card" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}">
+    let pokemon = JSON.parse(localStorage.listOfPkms);
+    content.innerHTML += `
+            <button data-id="card" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}" onclick="openPkmDetails(${currentNum})" >
                 <div class="pkm-card__header">
                     <span class="pkm-card__header_num">#${pokemon.pokemon[currentNum].id}</span>
                     <h2 class="pkm-card__header_name">${pokemon.pokemon[currentNum].name}</h2>
@@ -28,3 +29,46 @@ async function loadTypesOfPkm(currentNum) {
             `
     }
 }
+
+
+
+function openPkmDetails(currentNum) {
+    let pokemon = JSON.parse(localStorage.listOfPkms);
+
+    console.log(dialogRef);
+    dialogRef.showModal();
+    dialogRef.innerHTML = `
+        <div class="details ${pokemon.pokemon[currentNum].bgColor}">
+            <div class="details__header">
+                <div class="details__header_num num">#${pokemon.pokemon[currentNum].id}</div>
+                <h2 class="details__header_name">${pokemon.pokemon[currentNum].name}</h2>
+            </div>
+            <div class="details__types" onload="#">
+
+            </div>
+            <div class="details__img">
+                <img src="${pokemon.pokemon[currentNum].img}" alt="Picture of ${pokemon.pokemon[currentNum].name}">
+            </div>
+            <div class="details__infos">
+                <div class="details__infos_menu">
+                    <div class="details__infos_menu-about active" onclick="#">About</div>
+                    <div class="details__infos_menu-stats" onclick="#">Stats</div>
+                </div>
+            </div>
+            <div class="details__field" id="field" onload="#">
+                
+            </div>
+            <div class="details__arrows">
+                <button data-id="prev-button" class="details__arrows_left arrow" onclick="#"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
+                <button data-id="close-dialog-button" class="details__arrows_close arrow" onclick="closePkmDetails()"><img src="./assets/icons/arrows/close-arrow.svg" alt="close-arrow.svg"></button>
+                <button data-id="next-button" class="details__arrows_right arrow" onclick="#"><img src="./assets/icons/arrows/next-arrow.svg" alt="next-arrow.svg"></button>
+            </div>
+        </div>
+        `
+}
+
+function closePkmDetails() {
+    dialogRef.close()
+}
+
+

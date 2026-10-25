@@ -34,16 +34,15 @@ async function loadTypesOfPkm(currentNum) {
 
 function openPkmDetails(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);
-
-    console.log(dialogRef);
     dialogRef.showModal();
+    dialogRef.style.display = 'flex';
     dialogRef.innerHTML = `
         <div class="details ${pokemon.pokemon[currentNum].bgColor}">
             <div class="details__header">
                 <div class="details__header_num num">#${pokemon.pokemon[currentNum].id}</div>
                 <h2 class="details__header_name">${pokemon.pokemon[currentNum].name}</h2>
             </div>
-            <div class="details__types" onload="#">
+            <div id="details__types-${currentNum}"  class="details__types" onload="${loadTypesAtDetails(currentNum)}"">
 
             </div>
             <div class="details__img">
@@ -59,16 +58,39 @@ function openPkmDetails(currentNum) {
                 
             </div>
             <div class="details__arrows">
-                <button data-id="prev-button" class="details__arrows_left arrow" onclick="#"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
+                <button data-id="prev-button" class="details__arrows_left arrow" onclick="showPrevPkm(${currentNum})"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
                 <button data-id="close-dialog-button" class="details__arrows_close arrow" onclick="closePkmDetails()"><img src="./assets/icons/arrows/close-arrow.svg" alt="close-arrow.svg"></button>
-                <button data-id="next-button" class="details__arrows_right arrow" onclick="#"><img src="./assets/icons/arrows/next-arrow.svg" alt="next-arrow.svg"></button>
+                <button data-id="next-button" class="details__arrows_right arrow" onclick="showNextPkm(${currentNum})"><img src="./assets/icons/arrows/next-arrow.svg" alt="next-arrow.svg"></button>
             </div>
         </div>
         `
 }
 
-function closePkmDetails() {
-    dialogRef.close()
+async function loadTypesAtDetails(currentNum) {
+    let pokemon = JSON.parse(localStorage.listOfPkms);
+    for (let i = 0; i < pokemon.pokemon[currentNum].types.length; i++) {
+        document.getElementById(`details__types-${await currentNum}`).innerHTML += `
+                <div class="details__types_type">
+                    <div class="details__types_type-name">${pokemon.pokemon[currentNum].types[i]}</div>
+                    <img class="details__types_type-icon" src="./assets/icons/types/${pokemon.pokemon[currentNum].types[i]}.svg" alt="${pokemon.pokemon[currentNum].types[i]}.svg">
+                </div>
+            `
+    }
 }
 
+function showPrevPkm(currentNum) {
+    if (currentNum > 1) {
+        openPkmDetails(currentNum - 1)
+    }
+}
 
+function showNextPkm(currentNum) {
+    if (currentNum < endNum) {
+        openPkmDetails(currentNum + 1)
+    }
+}
+
+function closePkmDetails() {
+    dialogRef.close();
+    dialogRef.style.display = 'none';
+}

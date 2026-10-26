@@ -30,9 +30,9 @@ async function getCurrentPkmDetails(currentNum) {
     currentPkmDetails[currentNum] = {
         "id": await responseToJson.id,
         "name": await responseToJson.name,
-        "types": await getTypesOfPkm(currentNum),
-        "abilities": await getAbilitiesOfPkm(currentNum),
-        "stats": await responseToJson.stats,
+        "types": await getPkmTypes(currentNum),
+        "abilities": await getPkmAbilities(currentNum),
+        "stats": await getPkmStats(currentNum),
         "height": await responseToJson.height,
         "weight": await responseToJson.weight,
         "bgColor": await responseToJson.types[0].type.name,
@@ -41,7 +41,7 @@ async function getCurrentPkmDetails(currentNum) {
     return currentPkmDetails
 }
 
-async function getTypesOfPkm(currentNum) {
+async function getPkmTypes(currentNum) {
     let responseToJson = await fetchPkmAPI(currentNum);
     const arrOfPkmTypes = [];
     for (let i = 0; i < responseToJson.types.length; i++) {
@@ -50,14 +50,29 @@ async function getTypesOfPkm(currentNum) {
     return arrOfPkmTypes
 } 
 
-async function getAbilitiesOfPkm(currentNum) {
+async function getPkmAbilities(currentNum) {
     let responseToJson = await fetchPkmAPI(currentNum);
-    const arrOfPkmAbilities = [];
+    let arrOfPkmAbilities = [];
     for (let i = 0; i < responseToJson.abilities.length; i++) {
-        arrOfPkmAbilities.push(responseToJson.abilities[i].ability.name)
+        arrOfPkmAbilities += `<tr><td>${responseToJson.abilities[i].ability.name}</td></tr>`
+        // arrOfPkmAbilities.push(responseToJson.abilities[i].ability.name)
     }
     return arrOfPkmAbilities
 } 
+
+async function getPkmStats(currentNum) {
+    let responseToJson = await fetchPkmAPI(currentNum);
+    let arrOfPkmStats = [];
+    for (let i = 0; i < responseToJson.stats.length; i++) {
+        arrOfPkmStats += `
+            <tr>
+                <th>${responseToJson.stats[i].stat.name}</th>
+                <td>${responseToJson.stats[i].base_stat}</td>
+            </tr>
+        `
+    }
+    return arrOfPkmStats
+}
 
 async function getPkmImg(currentNum) {
     let pkmImg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentNum}.svg`;

@@ -37,25 +37,23 @@ function openPkmDetails(currentNum) {
     dialogRef.showModal();
     dialogRef.style.display = 'flex';
     dialogRef.innerHTML = `
-        <div class="details ${pokemon.pokemon[currentNum].bgColor}">
+        <div data-id="overlay-${pokemon.pokemon[currentNum].name}" class="details ${pokemon.pokemon[currentNum].bgColor}">
             <div class="details__header">
                 <div class="details__header_num num">#${pokemon.pokemon[currentNum].id}</div>
                 <h2 class="details__header_name">${pokemon.pokemon[currentNum].name}</h2>
             </div>
-            <div id="details__types-${currentNum}"  class="details__types" onload="${loadTypesAtDetails(currentNum)}"">
-
-            </div>
             <div class="details__img">
-                <img src="${pokemon.pokemon[currentNum].img}" alt="Picture of ${pokemon.pokemon[currentNum].name}">
+                <img data-id="dialog-image" src="./assets/icons/logo/logo.png" alt="Background image">
+                <img data-id="card-image" src="${pokemon.pokemon[currentNum].img}" alt="Picture of ${pokemon.pokemon[currentNum].name}">
             </div>
             <div class="details__infos">
                 <div class="details__infos_menu">
-                    <div class="details__infos_menu-about active" onclick="#">About</div>
-                    <div class="details__infos_menu-stats" onclick="#">Stats</div>
+                    <p class="details__infos_menu-about active" onclick="loadPkmAbout(${currentNum})">About</p>
+                    <p class="details__infos_menu-stats" onclick="loadPkmStats(${currentNum})">Stats</p>
                 </div>
-            </div>
-            <div class="details__field" id="field" onload="#">
+                <div class="details__infos_field" onload="${loadPkmAbout(currentNum)}">
                 
+                </div>
             </div>
             <div class="details__arrows">
                 <button data-id="prev-button" class="details__arrows_left arrow" onclick="showPrevPkm(${currentNum})"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
@@ -76,6 +74,45 @@ async function loadTypesAtDetails(currentNum) {
                 </div>
             `
     }
+}
+
+async function loadPkmAbout(currentNum) {
+    let detailsField = document.getElementsByClassName('details__infos_field');
+    await currentNum;
+    detailsField[0].innerHTML = '';
+    detailsField[0].innerHTML = tableTemplateOfAbout(currentNum);
+}
+
+function tableTemplateOfAbout(currentNum) {
+    let pokemon = JSON.parse(localStorage.listOfPkms);
+    return `
+        <table>
+            <tr>
+                <th>Abilities</th>
+            </tr>
+                ${pokemon.pokemon[currentNum].abilities}
+            <tr>
+                <th>Height</th>
+                <td>${pokemon.pokemon[currentNum].height}</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>${pokemon.pokemon[currentNum].weight}</td>
+            </tr>
+        </table>
+    `
+}
+
+async function loadPkmStats(currentNum) {
+    let detailsField = document.getElementsByClassName('details__infos_field');
+    let pokemon = JSON.parse(localStorage.listOfPkms);
+    await currentNum;
+    detailsField[0].innerHTML = '';
+    detailsField[0].innerHTML = `
+        <table class="details__infos_field-stats">
+            ${pokemon.pokemon[currentNum].stats}
+        </table>
+    `;
 }
 
 function showPrevPkm(currentNum) {

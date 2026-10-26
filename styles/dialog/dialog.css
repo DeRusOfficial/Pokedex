@@ -3,8 +3,8 @@ body:has(dialog[open]) {
 }
 
 dialog {
-    height: 600px;
-    width: 352px;
+    height: 664px;
+    width: 400px;
     padding: 0;
 
     border: none;
@@ -29,7 +29,9 @@ dialog::backdrop {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 48px;
+
+    position: relative;
 }
 
 .details__header {
@@ -39,7 +41,7 @@ dialog::backdrop {
     justify-content: space-between;
 }
 
-.details__types {
+/* .details__types {
     padding-left: 8px;
 
     display: flex;
@@ -77,15 +79,111 @@ font-size: 16px;
 
     position: absolute;
     right: 0;
-}
+} */
 
 .details__img {
-    height: 250px;
+    height: 240px;
     width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
 }
 
 .details__img>img {
     height: 100%;
     width: 100%;
+}
+
+.details__img>img:nth-child(1) {
+    height: 120%;
+
+    position: absolute;
+    z-index: 1;
+
+    filter: opacity(0.2);
+
+    object-fit: contain;
+}
+
+.details__img>img:nth-child(2) {
+    position: absolute;
+    z-index: 2;
+
+    object-fit: contain;
     filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, .7));
+}
+
+.details__infos {
+    height: 260px;
+    width: 100%;
+
+    padding-top: 8px;
+    background-color: white;
+    border-radius: 16px 16px 0 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.details__infos_menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.details__infos_menu>p {
+    cursor: pointer;
+}
+
+.details__infos_field {
+    display: flex;
+    justify-content: center;
+}
+
+.details__infos_field-stats tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.details__arrows {
+    width: 100%;
+    padding: 0 24px;
+
+    position: absolute;
+    bottom: 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.arrow {
+    height: 48px;
+    width: 48px;
+    padding: 0;
+
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow>img {
+    height: 100%;
+    width: 100%;
 }

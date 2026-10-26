@@ -27,7 +27,7 @@ async function getCurrentPkmDetails(currentNum) {
     let responseToJson = await fetchPkmAPI(currentNum);
     currentPkmDetails[currentNum] = {
         "id": await responseToJson.id,
-        "name": await responseToJson.name,
+        "name": capitalizeFirstLetters(await responseToJson.name),
         "types": await getPkmTypes(currentNum),
         "abilities": await getPkmAbilities(currentNum),
         "stats": await getPkmStats(currentNum),
@@ -83,24 +83,31 @@ function loadMorePkm() {
 
 async function searchPkm() {
     let inputValue = document.querySelector('[data-id="search-input"]');
-    if (inputValue.value.length < 3) {
-        content.innerHTML = '';
-        currentNum = 1;
-        endNum;
-        init();
+    if (inputValue.value.length <= 2) {
+        alert('Please enter minimum 3 characters')
     } else {
         content.innerHTML = '';
+        console.log(inputValue.value)
         for (let i = 1; i <= pkmQuantity; i++) {
             let responseToJson = await fetchPkmAPI(i);
-            if ((responseToJson.name).includes(inputValue.value)) {
+            if ((convertLetterToLowerCase(responseToJson.name)).includes(convertLetterToLowerCase(inputValue.value))) {
                 render(i);
             }
         }
     }
-
 }
 
+// Using REGEX to change only the first letter of each word - after a space or symbol like "-"
+// Structure of Regex-Literal: /PATTERN/FLAGS
+// \b - search for a beginning letter, a letter after a space or "-" ("_" REGEX treat it like a letter)
+// \w - search for the first letter after a boundary (/b) 
+function capitalizeFirstLetters(currentPkmName) {
+    return currentPkmName.replace(/\b\w/g, char => char.toUpperCase());
+}
 
+function convertLetterToLowerCase(currentPkmName) {
+    return currentPkmName.toLowerCase()
+}
 
 async function fetchPkmAPI(currentNum) {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${currentNum}`);

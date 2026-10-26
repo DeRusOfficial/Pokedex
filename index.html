@@ -25,7 +25,7 @@
         </div>
         <div class="menu__search">
             <input data-id="search-input" type="text" placeholder="Enter a pokemon..." class="menu__search_input">
-            <button data-id="search-button" class="menu__search_btn">Search</button>
+            <button data-id="search-button" class="menu__search_btn" onclick="searchPkm()">Search</button>
         </div>
     </header>
 
@@ -51,34 +51,10 @@
         </button> -->
     </main>
 
-    <button data-id="load-more-button" onclick="loadMorePkm()">Load more Pokemons</button>
+    <button aria-label="Load more pokemons" data-id="load-more-button" onclick="loadMorePkm()">Load more Pokemons</button>
 
-    <dialog data-id="dialog">
-        <!-- <div class="details ${pokemon.pokemon[currentNum].bgColor}">
-            <div class="details__header">
-                <div class="details__header_num num">#${pokemon.pokemon[currentNum].id}</div>
-                <h2 class="details__header_name">${pokemon.pokemon[currentNum].name}</h2>
-            </div>
-            <div class="details__types" onload="#">
+    <dialog data-id="dialog" id="pkmDialog" aria-labelledby="pkmName" onclick="closeDialog()">
 
-            </div>
-            <div class="details__img">
-                <img src="${pokemon.pokemon[currentNum].img}" alt="Picture of ${pokemon.pokemon[currentNum].name}">
-            </div>
-            <div class="details__infos">
-                <div class="details__infos_menu">
-                    <div class="details__infos_menu-about active" onclick="#">About</div>
-                    <div class="details__infos_menu-stats" onclick="#">Stats</div>
-                </div>
-            </div>
-            <div class="details__field" id="field" onload="#">
-                
-            </div>
-            <div class="details__arrows">
-                <button data-id="prev-button" class="details__arrows_left arrow" onclick="prevPokemon(3)"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
-                <button data-id="next-button" class="details__arrows_right arrow" onclick="nextPokemon(3)"><img src="./assets/icons/arrows/next-arrow.svg" alt="next-arrow.svg"></button>
-            </div>
-        </div> -->
     </dialog>
 
 </body>

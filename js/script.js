@@ -5,16 +5,16 @@ let pkmQuantity = 1025;
 const content = document.querySelector('[data-id=content]');
 let currentPkmDetails = [];
 
-function init() {
+async function init() {
     for (currentNum; currentNum <= endNum; currentNum++) {
-        render(currentNum);
-    } 
+        await render(currentNum);
+    }
 }
 
 async function render(currentNum) {
-        await getCurrentPkmDetails(currentNum);
-        await loadToLocalStorage();
-        loadCard(currentNum);
+    await getCurrentPkmDetails(currentNum);
+    await loadToLocalStorage();
+    loadCard(currentNum);
 }
 
 async function loadToLocalStorage() {
@@ -34,7 +34,7 @@ async function getCurrentPkmDetails(currentNum) {
         "height": await responseToJson.height,
         "weight": await responseToJson.weight,
         "bgColor": await responseToJson.types[0].type.name,
-        "img" : await getPkmImg(currentNum),
+        "img": await getPkmImg(currentNum),
     }
     return currentPkmDetails
 }
@@ -46,7 +46,7 @@ async function getPkmTypes(currentNum) {
         arrOfPkmTypes.push(responseToJson.types[i].type.name)
     }
     return arrOfPkmTypes
-} 
+}
 
 async function getPkmAbilities(currentNum) {
     let responseToJson = await fetchPkmAPI(currentNum);
@@ -55,7 +55,7 @@ async function getPkmAbilities(currentNum) {
         arrOfPkmAbilities += `<tr><td>${responseToJson.abilities[i].ability.name}</td></tr>`
     }
     return arrOfPkmAbilities
-} 
+}
 
 async function getPkmStats(currentNum) {
     let responseToJson = await fetchPkmAPI(currentNum);
@@ -79,6 +79,25 @@ async function getPkmImg(currentNum) {
 function loadMorePkm() {
     endNum = endNum + 20;
     init();
+}
+
+async function searchPkm() {
+    let inputValue = document.querySelector('[data-id="search-input"]');
+    if (inputValue.value.length < 3) {
+        content.innerHTML = '';
+        currentNum = 1;
+        endNum;
+        init();
+    } else {
+        content.innerHTML = '';
+        for (let i = 1; i <= pkmQuantity; i++) {
+            let responseToJson = await fetchPkmAPI(i);
+            if ((responseToJson.name).includes(inputValue.value)) {
+                render(i);
+            }
+        }
+    }
+
 }
 
 

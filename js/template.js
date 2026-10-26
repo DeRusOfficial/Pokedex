@@ -3,10 +3,10 @@ const dialogRef = document.querySelector('[data-id="dialog"]');
 function loadCard(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);
     content.innerHTML += `
-            <button data-id="card" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}" onclick="openPkmDetails(${currentNum})" >
+            <button data-id="card" aria-haspopup="dialog" aria-controls="pkmDialog" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}" onclick="openPkmDetails(${currentNum})">
                 <div class="pkm-card__header">
                     <span class="pkm-card__header_num">#${pokemon.pokemon[currentNum].id}</span>
-                    <h2 class="pkm-card__header_name">${pokemon.pokemon[currentNum].name}</h2>
+                    <h2 id="pkmName" class="pkm-card__header_name">${pokemon.pokemon[currentNum].name}</h2>
                 </div>
                 <div id="pkm-card__types-${currentNum}" class="pkm-card__types" onload="${loadTypesOfPkm(currentNum)}">
                     
@@ -15,7 +15,7 @@ function loadCard(currentNum) {
                     <img src="${pokemon.pokemon[currentNum].img}" alt="Picture of ${pokemon.pokemon[currentNum].name}">
                 </div>
             </button>
-        `
+        `;
 }
 
 async function loadTypesOfPkm(currentNum) {
@@ -48,17 +48,17 @@ function openPkmDetails(currentNum) {
             </div>
             <div class="details__infos">
                 <div class="details__infos_menu">
-                    <p class="details__infos_menu-about active" onclick="loadPkmAbout(${currentNum})">About</p>
-                    <p class="details__infos_menu-stats" onclick="loadPkmStats(${currentNum})">Stats</p>
+                    <p aria-label="Pokemon details" tabindex="0" role="button" class="details__infos_menu-details active" onclick="loadPkmDetails(${currentNum})" onkeydown="if(event.key === 'Enter') loadPkmDetails(${currentNum})">Details</p>
+                    <p aria-label="Pokemon stats" tabindex="0" role="button" class="details__infos_menu-stats" onclick="loadPkmStats(${currentNum})" onkeydown="if(event.key === 'Enter') loadPkmStats(${currentNum})">Stats</p>
                 </div>
-                <div class="details__infos_field" onload="${loadPkmAbout(currentNum)}">
+                <div class="details__infos_field" onload="${loadPkmDetails(currentNum)}">
                 
                 </div>
             </div>
             <div class="details__arrows">
-                <button data-id="prev-button" class="details__arrows_left arrow" onclick="showPrevPkm(${currentNum})"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
-                <button data-id="close-dialog-button" class="details__arrows_close arrow" onclick="closePkmDetails()"><img src="./assets/icons/arrows/close-arrow.svg" alt="close-arrow.svg"></button>
-                <button data-id="next-button" class="details__arrows_right arrow" onclick="showNextPkm(${currentNum})"><img src="./assets/icons/arrows/next-arrow.svg" alt="next-arrow.svg"></button>
+                <button aria-label="Show previous pokemon" data-id="prev-button" class="details__arrows_left arrow" onclick="showPrevPkm(${currentNum})"><img src="./assets/icons/arrows/prev-arrow.svg" alt="prev-arrow.svg"></button>
+                <button aria-label="Close dialog" data-id="close-dialog-button" class="details__arrows_close arrow" onclick="closePkmDetails()"><img src="./assets/icons/arrows/close-arrow.svg" alt="close-arrow.svg"></button>
+                <button aria-label="Show next pokemon" data-id="next-button" class="details__arrows_right arrow" onclick="showNextPkm(${currentNum})"><img src="./assets/icons/arrows/next-arrow.svg" alt="next-arrow.svg"></button>
             </div>
         </div>
         `
@@ -76,14 +76,14 @@ async function loadTypesAtDetails(currentNum) {
     }
 }
 
-async function loadPkmAbout(currentNum) {
+async function loadPkmDetails(currentNum) {
     let detailsField = document.getElementsByClassName('details__infos_field');
     await currentNum;
     detailsField[0].innerHTML = '';
-    detailsField[0].innerHTML = tableTemplateOfAbout(currentNum);
+    detailsField[0].innerHTML = tableTemplateOfDetails(currentNum);
 }
 
-function tableTemplateOfAbout(currentNum) {
+function tableTemplateOfDetails(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);
     return `
         <table>
@@ -125,6 +125,15 @@ function showNextPkm(currentNum) {
     if (currentNum < endNum) {
         openPkmDetails(currentNum + 1)
     }
+}
+
+function closeDialog() {
+    window.onclick = function(event) {
+        if (event.target == dialogRef) {
+            dialogRef.close();
+            dialogRef.style.display = 'none';
+        }
+    };
 }
 
 function closePkmDetails() {

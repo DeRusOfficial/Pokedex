@@ -1,13 +1,11 @@
-let currentNum;
-let endNum;
+let currentNum = 1;
+let endNum = 20;
 // let currentPkm;
 let pkmQuantity = 1025;
 const content = document.querySelector('[data-id=content]');
 let currentPkmDetails = [];
 
 function init() {
-    currentNum = 1;
-    endNum = 20;
     for (currentNum; currentNum <= endNum; currentNum++) {
         render(currentNum);
     } 
@@ -15,7 +13,7 @@ function init() {
 
 async function render(currentNum) {
         await getCurrentPkmDetails(currentNum);
-        loadToLocalStorage();
+        await loadToLocalStorage();
         loadCard(currentNum);
 }
 
@@ -55,7 +53,6 @@ async function getPkmAbilities(currentNum) {
     let arrOfPkmAbilities = [];
     for (let i = 0; i < responseToJson.abilities.length; i++) {
         arrOfPkmAbilities += `<tr><td>${responseToJson.abilities[i].ability.name}</td></tr>`
-        // arrOfPkmAbilities.push(responseToJson.abilities[i].ability.name)
     }
     return arrOfPkmAbilities
 } 
@@ -77,6 +74,11 @@ async function getPkmStats(currentNum) {
 async function getPkmImg(currentNum) {
     let pkmImg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentNum}.svg`;
     return pkmImg
+}
+
+function loadMorePkm() {
+    endNum = endNum + 20;
+    init();
 }
 
 

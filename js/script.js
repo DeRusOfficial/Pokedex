@@ -3,6 +3,7 @@ let endNum = 20;
 // let currentPkm;
 let pkmQuantity = 1025;
 const content = document.querySelector('[data-id=content]');
+const loadMoreBtn = document.querySelector('[data-id=load-more-button]');
 let currentPkmDetails = [];
 
 async function init() {
@@ -80,22 +81,36 @@ function loadMorePkm() {
     endNum = endNum + 20;
     init();
 }
+    let inputValue = document.querySelector('[data-id="search-input"]');
 
 async function searchPkm() {
-    let inputValue = document.querySelector('[data-id="search-input"]');
+    content.innerHTML = '';
     if (inputValue.value.length <= 2) {
+        currentNum = 1;
+        inputValue.value = '';
+        init();
         alert('Please enter minimum 3 characters')
+
+        loadMoreBtn.style.display = 'flex';
     } else {
         content.innerHTML = '';
         console.log(inputValue.value)
+        loadMoreBtn.style.display = 'none';
         for (let i = 1; i <= pkmQuantity; i++) {
             let responseToJson = await fetchPkmAPI(i);
-            if ((convertLetterToLowerCase(responseToJson.name)).includes(convertLetterToLowerCase(inputValue.value))) {
-                render(i);
+            if (inputValue.value.length <= 2) {
+                break;
+            } else {
+                if ((convertLetterToLowerCase(responseToJson.name)).includes(convertLetterToLowerCase(inputValue.value))) {
+                    render(i);
+                }
             }
+
         }
     }
 }
+
+
 
 // Using REGEX to change only the first letter of each word - after a space or symbol like "-"
 // Structure of Regex-Literal: /PATTERN/FLAGS
@@ -105,6 +120,7 @@ function capitalizeFirstLetters(currentPkmName) {
     return currentPkmName.replace(/\b\w/g, char => char.toUpperCase());
 }
 
+// This is used so that the case (upper/lower case) does not matter during a search
 function convertLetterToLowerCase(currentPkmName) {
     return currentPkmName.toLowerCase()
 }

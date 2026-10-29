@@ -6,8 +6,35 @@
 
 body {
     background-color: var(--bg-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-bottom: 48px;
 }
 
+#load-more-button {
+    height: 48px;
+    width: 240px;
 
+    padding: 8px;
+    border-radius: 16px;
+
+    background-color: white;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: all 255ms ease-in-out;
+}
+
+#load-more-button:hover {
+    background-color: brown;
+    color: white;
+}
 
 

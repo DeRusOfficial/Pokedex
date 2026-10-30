@@ -5,12 +5,15 @@ let endNum = 20;
 const content = document.querySelector('[data-id=content]');
 let inputValue = document.querySelector('[data-id="search-input"]');
 const loadMoreBtn = document.querySelector('[data-id=load-more-button]');
+const loadingOverlay = document.getElementById('loadingOverlay');
 let currentPkmDetails = [];
 
 async function init() {
+    activateLoadingScreen()
     for (currentNum; currentNum <= endNum; currentNum++) {
         await render(currentNum);
     }
+    deactivateLoadingScreen()
 }
 
 async function render(currentNum) {
@@ -91,7 +94,9 @@ async function searchPkm() {
         loadMoreBtn.style.display = 'flex';
     } else {
         loadMoreBtn.style.display = 'none';
+        activateLoadingScreen()
         await lookForSearchedPkm(searchedPkm)
+        deactivateLoadingScreen()
     }
 }
 
@@ -102,6 +107,16 @@ async function lookForSearchedPkm(searchedPkm) {
             render(i);
         }
     }
+}
+
+function activateLoadingScreen() {
+    loadingOverlay.style.display = 'flex';
+    document.body.classList.add('no-scroll')
+}
+
+function deactivateLoadingScreen() {
+    loadingOverlay.style.display = 'none';
+    document.body.classList.remove('no-scroll')
 }
 
 

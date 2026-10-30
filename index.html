@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./styles/variables/variables.css">
+    <link rel="stylesheet" href="./styles/animations/animations.css">
     <link rel="stylesheet" href="./styles/header/header.css">
     <link rel="stylesheet" href="./styles/main/main.css">
     <link rel="stylesheet" href="./styles/dialog/dialog.css">
+    <link rel="stylesheet" href="./styles/overlay/overlay.css">
     <link rel="stylesheet" href="./styles/styles.css">
 
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/logo/logo.png">
@@ -53,9 +55,15 @@
 
     <button aria-label="Load more pokemons" data-id="load-more-button" id="load-more-button" onclick="loadMorePkm()">Load more Pokemons</button>
 
-    <dialog data-id="dialog" id="pkmDialog" aria-labelledby="pkmName" onclick="closeDialog()">
+    <dialog data-id="dialog" id="pkmDialog" aria-labelledby="pkmName" onclick="closeDialog()"> </dialog>
 
-    </dialog>
+    <div id="loadingOverlay">
+        <div id="loadingSpinner">
+            <div class="dots">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
 
 </body>
     <script src="./js/template.js"></script>

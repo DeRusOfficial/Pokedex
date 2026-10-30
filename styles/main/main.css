@@ -9,8 +9,8 @@
 }
 
 .pkm-card {
-    height: 300px;
-    width: 300px;
+    height: 320px;
+    width: 320px;
     padding: 24px;
 
     border: none;
@@ -84,8 +84,8 @@
 }
 
 .pkm-card__img {
-    height: 180px;
-    width: 180px;
+    height: 224px;
+    width: 224px;
 
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 24px 0 24px 0;

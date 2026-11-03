@@ -88,7 +88,7 @@ function loadMorePkm() {
 async function searchPkm() {
     let searchedPkm = convertLetterToLowerCase(inputValue.value);
     content.innerHTML = '';
-    if (inputValue.value.length <= 2) {
+    if ((inputValue.value.length <= 2) && (content.innerHTML == '')) {
         currentNum = 1;
         init();
         loadMoreBtn.style.display = 'flex';
@@ -107,14 +107,23 @@ async function lookForSearchedPkm(searchedPkm) {
             render(i);
         }
     }
+    if (content.innerHTML == '') {
+        content.innerHTML = `
+            <div data-id="not-found" >Pokemon "${searchedPkm}" could not be found. Please try again using a different spelling.</div>
+        `
+    }
 }
 
 function activateLoadingScreen() {
+    content.inert = true; //If inert is true, the user can't focus on other elements at the background while 
+    inputValue.readOnly = true; //If readOnly is true, the user can't write or tip something in the inputField while the loadingScreen is active
     loadingOverlay.style.display = 'flex';
     document.body.classList.add('no-scroll')
 }
 
 function deactivateLoadingScreen() {
+    content.inert = false;
+    inputValue.readOnly = false;
     loadingOverlay.style.display = 'none';
     document.body.classList.remove('no-scroll')
 }

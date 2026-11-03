@@ -27,7 +27,6 @@
         </div>
         <div class="menu__search">
             <input data-id="search-input" type="text" placeholder="Enter minimum 3 characters..." class="menu__search_input" oninput="searchPkm()">
-            <button data-id="search-button" class="menu__search_btn">Search</button>
         </div>
     </header>
 
@@ -58,11 +57,12 @@
     <dialog data-id="dialog" id="pkmDialog" aria-labelledby="pkmName" onclick="closeDialog()"> </dialog>
 
     <div id="loadingOverlay">
-        <div id="loadingSpinner">
+        <div id="loadingSpinner" role="status" aria-live="assertive">
             <div class="dots">
                 <div class="circle"></div>
             </div>
         </div>
+        <p>Loading pokemons ...</p>
     </div>
 
 </body>

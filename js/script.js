@@ -109,7 +109,7 @@ async function lookForSearchedPkm(searchedPkm) {
     }
     if (content.innerHTML == '') {
         content.innerHTML = `
-            <div data-id="not-found" >Pokemon "${searchedPkm}" could not be found. Please try again using a different spelling.</div>
+            <p data-id="not-found" >Pokemon "${searchedPkm}" could not be found. Please try again using a different spelling.</p>
         `
     }
 }

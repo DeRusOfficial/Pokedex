@@ -38,3 +38,69 @@ body {
 }
 
 
+
+@media (max-width: 400px) {
+    .menu {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    input {
+        width: 250px;
+    }
+
+    dialog {
+        height: 536px;
+        width: 280px;
+    }
+
+    .details {
+        padding: 16px;
+    }
+
+    .details__img {
+        height: 192px;
+        bottom: 32px;
+    }
+
+    .arrow {
+        height: 32px;
+        width: 32px;
+    }
+
+    .content {
+        padding: 64px 16px;
+    }
+
+    .pkm-card {
+        height: 280px;
+        width: 280px;
+        padding: 12px;
+    }
+
+    .pkm-card__types {
+        flex-direction: row;
+    }
+
+    .pkm-card__img {
+        height: 180px;
+        width: 100%;
+        border-radius: 24px;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .pkm-card__img {
+        height: 200px;
+        width: 200px;
+    }
+
+    dialog {
+        width: 360px;
+    }
+}

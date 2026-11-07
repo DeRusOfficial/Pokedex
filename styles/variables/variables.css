@@ -1,5 +1,18 @@
 :root {
     --bg-color: #42001d;
+    --main-color: white;
+}
+
+.font-silkscreen {
+    font-family: 'Silkscreen', sans-serif;
+    font-weight: 300;
+    font-size: 1em;
+}
+
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1em;
 }
 
 /* bg-color of pkmCards */

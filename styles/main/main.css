@@ -26,14 +26,21 @@
     cursor: pointer;
 }
 
-
 .pkm-card__header {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     gap: 8px;
+}   
+
+.pkm-card__header_num {
+    font-size: 1.5rem;
 }
 
+.pkm-card__header_name {
+    font-size: 1.5rem;
+    position: relative;
+}
 
 .pkm-card__types {
     padding-left: 8px;
@@ -60,10 +67,6 @@
     align-items: center;
 
     position: relative;
-}
-
-.pkm-card__types_details-name {
-    font-size: 16px;
 }
 
 .pkm-card__types_details-icon {
@@ -108,6 +111,17 @@
 }
 
 .pkm-card:hover {
+    .pkm-card__header_name::after {
+        content: '';
+        position: absolute;
+
+        width: 30%;
+        height: 1px;
+        left: 0;
+        bottom: 0;
+
+        background-color: black;
+    }
     .pkm-card__img>img {
         height: 97%;
         width: 97%;

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./styles/variables/variables.css">
+    <link rel="stylesheet" href="./assets/fonts/_montserrat.css">
+    <link rel="stylesheet" href="./assets/fonts/_silkscreen.css">
     <link rel="stylesheet" href="./styles/animations/animations.css">
     <link rel="stylesheet" href="./styles/header/header.css">
     <link rel="stylesheet" href="./styles/main/main.css">
@@ -23,40 +25,22 @@
             <div class="menu__logo_img">
                 <img src="./assets/icons/favicon/favicon-32x32.png" alt="Pokedex">
             </div>
-            <h1 class="menu__logo_text">Pokedex</h1>
+            <h1 class="menu__logo_text font-silkscreen">Pokedex</h1>
         </div>
         <div class="menu__search">
-            <input data-id="search-input" type="text" placeholder="Enter minimum 3 characters..." class="menu__search_input" oninput="searchPkm()">
+            <input class="font-montserrat" data-id="search-input" id="searchInput" type="text" placeholder="Enter minimum 3 characters..." class="menu__search_input" oninput="searchPkm()">
         </div>
     </header>
 
     <main data-id="content" class="content">
-        <!-- <button data-id="card" class="pkm-card">
-            <div class="pkm-card__header">
-                <span class="pkm-card__header_num">#1</span>
-                <h2 class="pkm-card__header_name">Pokemon</h2>
-            </div>
-            <div class="pkm-card__types">
-                <div class="pkm-card__types_details">
-                    <div class="pkm-card__types_details-name">grass</div>
-                    <img class="pkm-card__types_details-icon" src="./assets/icons/types/bug.svg" alt="type-icon">
-                </div>
-                <div class="pkm-card__types_details">
-                    <div class="pkm-card__types_details-name">poison</div>
-                    <img class="pkm-card__types_details-icon" src="./assets/icons/types/poison.svg" alt="type-icon">
-                </div>
-            </div>
-            <div class="pkm-card__img">
-                <img src="./assets/icons/logo/logo.png" alt="pkm_IMG">
-            </div>
-        </button> -->
+
     </main>
 
     <button aria-label="Load more pokemons" data-id="load-more-button" id="load-more-button" onclick="loadMorePkm()">Load more Pokemons</button>
 
     <dialog data-id="dialog" id="pkmDialog" aria-labelledby="pkmName" onclick="closeDialog()"> </dialog>
 
-    <div id="loadingOverlay">
+    <div id="loadingOverlay" aria-modal="loading-overlay">
         <div id="loadingSpinner" role="status" aria-live="assertive">
             <div class="dots">
                 <div class="circle"></div>
@@ -68,4 +52,6 @@
 </body>
     <script src="./js/template.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/features.js"></script>
+    <script src="./js/getInfos.js"></script>
 </html>

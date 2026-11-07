@@ -5,8 +5,8 @@ function loadCard(currentNum) {
     content.innerHTML += `
             <button data-id="card" aria-haspopup="dialog" aria-controls="pkmDialog" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}" onclick="openPkmDetails(${currentNum})">
                 <div class="pkm-card__header">
-                    <span class="pkm-card__header_num">#${pokemon.pokemon[currentNum].id}</span>
-                    <h2 id="pkmName" class="pkm-card__header_name">${pokemon.pokemon[currentNum].name}</h2>
+                    <span class="pkm-card__header_num font-silkscreen">#${pokemon.pokemon[currentNum].id}</span>
+                    <h2 id="pkmName" class="pkm-card__header_name font-montserrat">${pokemon.pokemon[currentNum].name}</h2>
                 </div>
                 <div id="pkm-card__types-${currentNum}" class="pkm-card__types" onload="${loadTypesOfPkm(currentNum)}">
                     
@@ -23,14 +23,12 @@ async function loadTypesOfPkm(currentNum) {
     for (let i = 0; i < pokemon.pokemon[currentNum].types.length; i++) {
         document.getElementById(`pkm-card__types-${await currentNum}`).innerHTML += `
                 <div class="pkm-card__types_details">
-                    <div class="pkm-card__types_details-name">${pokemon.pokemon[currentNum].types[i]}</div>
+                    <div class="pkm-card__types_details-name font-montserrat">${pokemon.pokemon[currentNum].types[i]}</div>
                     <img class="pkm-card__types_details-icon" src="./assets/icons/types/${pokemon.pokemon[currentNum].types[i]}.svg" alt="${pokemon.pokemon[currentNum].types[i]}.svg">
                 </div>
             `
     }
 }
-
-
 
 function openPkmDetails(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);
@@ -39,8 +37,8 @@ function openPkmDetails(currentNum) {
     dialogRef.innerHTML = `
         <div data-id="overlay-${pokemon.pokemon[currentNum].name}" class="details ${pokemon.pokemon[currentNum].bgColor}">
             <div class="details__header">
-                <div class="details__header_num num">#${pokemon.pokemon[currentNum].id}</div>
-                <h2 class="details__header_name">${pokemon.pokemon[currentNum].name}</h2>
+                <div class="details__header_num num font-silkscreen">#${pokemon.pokemon[currentNum].id}</div>
+                <h2 class="details__header_name font-montserrat">${pokemon.pokemon[currentNum].name}</h2>
             </div>
             <div class="details__img">
                 <img data-id="dialog-image" src="./assets/icons/logo/logo.png" alt="Background image">
@@ -48,8 +46,8 @@ function openPkmDetails(currentNum) {
             </div>
             <div class="details__infos">
                 <div class="details__infos_menu">
-                    <p aria-label="Pokemon details" tabindex="0" role="button" class="details__infos_menu-details active" onclick="loadPkmDetails(${currentNum})" onkeydown="if(event.key === 'Enter') loadPkmDetails(${currentNum})">Details</p>
-                    <p aria-label="Pokemon stats" tabindex="0" role="button" class="details__infos_menu-stats" onclick="loadPkmStats(${currentNum})" onkeydown="if(event.key === 'Enter') loadPkmStats(${currentNum})">Stats</p>
+                    <p aria-label="Pokemon details" tabindex="0" role="button" id="detailsBtn" class="details__infos_menu-details font-montserrat active" onclick="loadPkmDetails(${currentNum})" onkeydown="if(event.key === 'Enter') loadPkmDetails(${currentNum})">Details</p>
+                    <p aria-label="Pokemon stats" tabindex="0" role="button" id="statsBtn" class="details__infos_menu-stats font-montserrat" onclick="loadPkmStats(${currentNum})" onkeydown="if(event.key === 'Enter') loadPkmStats(${currentNum})">Stats</p>
                 </div>
                 <div class="details__infos_field" onload="${loadPkmDetails(currentNum)}">
                 
@@ -64,23 +62,12 @@ function openPkmDetails(currentNum) {
         `
 }
 
-async function loadTypesAtDetails(currentNum) {
-    let pokemon = JSON.parse(localStorage.listOfPkms);
-    for (let i = 0; i < pokemon.pokemon[currentNum].types.length; i++) {
-        document.getElementById(`details__types-${await currentNum}`).innerHTML += `
-                <div class="details__types_type">
-                    <div class="details__types_type-name">${pokemon.pokemon[currentNum].types[i]}</div>
-                    <img class="details__types_type-icon" src="./assets/icons/types/${pokemon.pokemon[currentNum].types[i]}.svg" alt="${pokemon.pokemon[currentNum].types[i]}.svg">
-                </div>
-            `
-    }
-}
-
 async function loadPkmDetails(currentNum) {
     let detailsField = document.getElementsByClassName('details__infos_field');
     await currentNum;
     detailsField[0].innerHTML = '';
     detailsField[0].innerHTML = tableTemplateOfDetails(currentNum);
+    addUnderlineAtDetails();
 }
 
 function tableTemplateOfDetails(currentNum) {
@@ -88,20 +75,20 @@ function tableTemplateOfDetails(currentNum) {
     return `
         <table>
             <tr>
-                <th>Abilities</th>
+                <th class="font-montserrat td-fw-500">Abilities</th>
             </tr>
                 ${pokemon.pokemon[currentNum].abilities}
             <tr>
-                <th>Height</th>
-                <td>${pokemon.pokemon[currentNum].height}</td>
+                <th class="font-montserrat td-fw-500">Height</th>
+                <td class="font-silkscreen">${pokemon.pokemon[currentNum].height}</td>
             </tr>
             <tr>
-                <th>Weight</th>
-                <td>${pokemon.pokemon[currentNum].weight}</td>
+                <th class="font-montserrat td-fw-500">Weight</th>
+                <td class="font-silkscreen">${pokemon.pokemon[currentNum].weight}</td>
             </tr>
         </table>
     `
-}
+}   
 
 async function loadPkmStats(currentNum) {
     let detailsField = document.getElementsByClassName('details__infos_field');
@@ -113,30 +100,21 @@ async function loadPkmStats(currentNum) {
             ${pokemon.pokemon[currentNum].stats}
         </table>
     `;
+    addUnderlineAtStats();
 }
 
-function showPrevPkm(currentNum) {
-    if (currentNum > 1) {
-        openPkmDetails(currentNum - 1)
-    }
+function addUnderlineAtDetails() {
+    let detailsBtn = document.getElementById('detailsBtn');
+    let statsBtn = document.getElementById('statsBtn');
+
+    statsBtn.classList.remove('active');
+    detailsBtn.classList.add('active');
 }
 
-function showNextPkm(currentNum) {
-    if (currentNum < endNum) {
-        openPkmDetails(currentNum + 1)
-    }
-}
+function addUnderlineAtStats() {
+    let detailsBtn = document.getElementById('detailsBtn');
+    let statsBtn = document.getElementById('statsBtn');
 
-function closeDialog() {
-    window.onclick = function(event) {
-        if (event.target == dialogRef) {
-            dialogRef.close();
-            dialogRef.style.display = 'none';
-        }
-    };
-}
-
-function closePkmDetails() {
-    dialogRef.close();
-    dialogRef.style.display = 'none';
+    detailsBtn.classList.remove('active');
+    statsBtn.classList.add('active');
 }

@@ -41,45 +41,13 @@ dialog::backdrop {
     justify-content: space-between;
 }
 
-/* .details__types {
-    padding-left: 8px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
+.details__header_num {
+    font-size: 1.5em;
 }
 
-.details__types_type {
-    height: 32px;
-    width: 100px;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 24px;
-
-    padding: 8px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    position: relative;
+.details__header_name {
+    font-size: 1.5em;
 }
-
-.details__types_type-name {
-font-size: 16px;
-}
-
-.details__types_type-icon {
-    height: 40px;
-    width: 40px;
-
-    display: flex;
-
-    position: absolute;
-    right: 0;
-} */
 
 .details__img {
     height: 240px;
@@ -143,6 +111,24 @@ font-size: 16px;
 
 .details__infos_menu>p {
     cursor: pointer;
+    font-weight: 600;
+    position: relative;
+}
+
+.details__infos_menu>p:hover::after {
+    content: '';
+    position: absolute;
+
+    width: 30%;
+    height: 1px;
+    left: 0;
+    bottom: 0;
+    
+    background-color: black;
+}
+
+.td-fw-500 {
+    font-weight: 500;
 }
 
 .details__infos_field {

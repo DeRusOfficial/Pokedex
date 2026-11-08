@@ -1,4 +1,3 @@
-const dialogRef = document.querySelector('[data-id="dialog"]');
 
 function loadCard(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);

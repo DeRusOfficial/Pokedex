@@ -53,6 +53,20 @@ body {
 
 
 
+@keyframes rotateSpinner {
+    0% {
+        transform: rotateZ(0)
+    }
+
+    50% {
+        transform: rotateZ(180deg)
+    }
+
+    100% {
+        transform: rotateZ(360deg)
+    }
+}
+
 @media (max-width: 400px) {
     * {
         font-size: 14px;

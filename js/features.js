@@ -35,25 +35,37 @@ async function lookForSearchedPkm(searchedPkm) {
 
 function activateLoadingScreen() {
     content.inert = true;
-    document.body.classList.add('no-scroll')
+    inputValue.readOnly = true;
+    loadingOverlay.style.display = 'flex';
+    document.body.classList.add('no-scroll');
 }
 
 function deactivateLoadingScreen() {
     content.inert = false;
     inputValue.readOnly = false;
     loadingOverlay.style.display = 'none';
-    document.body.classList.remove('no-scroll')
+    document.body.classList.remove('no-scroll');
 }
 
 function showPrevPkm(currentNum) {
+    getArrowsFromDialog();
     if (currentNum > 1) {
-        openPkmDetails(currentNum - 1)
+        openPkmDetails(currentNum - 1);
+    }
+    if (currentNum === 2) {
+        arrowsAtDialog[0].style.cursor = 'not-allowed';
+        arrowsAtDialog[0].style.filter = 'opacity(0.5)';
     }
 }
 
 function showNextPkm(currentNum) {
+    getArrowsFromDialog();
     if (currentNum < endNum) {
-        openPkmDetails(currentNum + 1)
+        openPkmDetails(currentNum + 1);
+    }
+    if (currentNum === endNum - 1) {
+        arrowsAtDialog[2].style.cursor = 'not-allowed';
+        arrowsAtDialog[2].style.filter = 'opacity(0.5)';
     }
 }
 
@@ -71,10 +83,15 @@ function closePkmDetails() {
     dialogRef.style.display = 'none';
 }
 
+
+function getArrowsFromDialog() {
+    return arrowsAtDialog = document.getElementsByClassName('arrow');
+}
+
 function capitalizeFirstLetters(currentPkmName) {
     return currentPkmName.replace(/\b\w/g, char => char.toUpperCase());
 }
 
 function convertLetterToLowerCase(currentPkmName) {
-    return currentPkmName.toLowerCase()
+    return currentPkmName.toLowerCase();
 }

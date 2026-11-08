@@ -1,13 +1,12 @@
 
-function loadCard(currentNum) {
-    let pokemon = JSON.parse(localStorage.listOfPkms);
-    content.innerHTML += `
-            <button data-id="card" aria-haspopup="dialog" aria-controls="pkmDialog" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}" onclick="openPkmDetails(${currentNum})">
+function loadCard(currentNum, pokemon) {
+    return content.innerHTML += `
+            <button data-id="card" aria-haspopup="dialog" aria-controls="pkmDialog" class="pkm-card ${pokemon.pokemon[currentNum].bgColor}" onclick="openPkmDialog(${currentNum})">
                 <div class="pkm-card__header">
                     <span class="pkm-card__header_num font-silkscreen">#${pokemon.pokemon[currentNum].id}</span>
                     <h2 id="pkmName" class="pkm-card__header_name font-montserrat">${pokemon.pokemon[currentNum].name}</h2>
                 </div>
-                <div id="pkm-card__types-${currentNum}" class="pkm-card__types" onload="${loadTypesOfPkm(currentNum)}">
+                <div id="pkm-card__types-${currentNum}" class="pkm-card__types" onload="${loadTypesOfPkm(currentNum, pokemon)}">
                     
                 </div>
                 <div class="pkm-card__img">
@@ -17,23 +16,8 @@ function loadCard(currentNum) {
         `;
 }
 
-async function loadTypesOfPkm(currentNum) {
-    let pokemon = JSON.parse(localStorage.listOfPkms);
-    for (let i = 0; i < pokemon.pokemon[currentNum].types.length; i++) {
-        document.getElementById(`pkm-card__types-${await currentNum}`).innerHTML += `
-                <div class="pkm-card__types_details">
-                    <div class="pkm-card__types_details-name font-montserrat">${pokemon.pokemon[currentNum].types[i]}</div>
-                    <img class="pkm-card__types_details-icon" src="./assets/icons/types/${pokemon.pokemon[currentNum].types[i]}.svg" alt="${pokemon.pokemon[currentNum].types[i]}.svg">
-                </div>
-            `
-    }
-}
-
-function openPkmDetails(currentNum) {
-    let pokemon = JSON.parse(localStorage.listOfPkms);
-    dialogRef.showModal();
-    dialogRef.style.display = 'flex';
-    dialogRef.innerHTML = `
+function loadPkmDialog(currentNum, pokemon) {
+    return dialogRef.innerHTML = `
         <div data-id="overlay-${pokemon.pokemon[currentNum].name}" class="details ${pokemon.pokemon[currentNum].bgColor}">
             <div class="details__header">
                 <div class="details__header_num num font-silkscreen">#${pokemon.pokemon[currentNum].id}</div>
@@ -61,16 +45,7 @@ function openPkmDetails(currentNum) {
         `
 }
 
-async function loadPkmDetails(currentNum) {
-    let detailsField = document.getElementsByClassName('details__infos_field');
-    await currentNum;
-    detailsField[0].innerHTML = '';
-    detailsField[0].innerHTML = tableTemplateOfDetails(currentNum);
-    addUnderlineAtDetails();
-}
-
-function tableTemplateOfDetails(currentNum) {
-    let pokemon = JSON.parse(localStorage.listOfPkms);
+function tableTemplateOfDetails(currentNum, pokemon) {
     return `
         <table>
             <tr>
@@ -88,32 +63,3 @@ function tableTemplateOfDetails(currentNum) {
         </table>
     `
 }   
-
-async function loadPkmStats(currentNum) {
-    let detailsField = document.getElementsByClassName('details__infos_field');
-    let pokemon = JSON.parse(localStorage.listOfPkms);
-    await currentNum;
-    detailsField[0].innerHTML = '';
-    detailsField[0].innerHTML = `
-        <table class="details__infos_field-stats">
-            ${pokemon.pokemon[currentNum].stats}
-        </table>
-    `;
-    addUnderlineAtStats();
-}
-
-function addUnderlineAtDetails() {
-    let detailsBtn = document.getElementById('detailsBtn');
-    let statsBtn = document.getElementById('statsBtn');
-
-    statsBtn.classList.remove('active');
-    detailsBtn.classList.add('active');
-}
-
-function addUnderlineAtStats() {
-    let detailsBtn = document.getElementById('detailsBtn');
-    let statsBtn = document.getElementById('statsBtn');
-
-    detailsBtn.classList.remove('active');
-    statsBtn.classList.add('active');
-}

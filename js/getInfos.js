@@ -1,14 +1,14 @@
 async function getCurrentPkmDetails(currentNum) {
     let responseToJson = await fetchPkmAPI(currentNum);
     currentPkmDetails[currentNum] = {
-        "id": await responseToJson.id,
-        "name": capitalizeFirstLetters(await responseToJson.name),
+        "id": responseToJson.id,
+        "name": capitalizeFirstLetters(responseToJson.name),
         "types": await getPkmTypes(responseToJson),
         "abilities": await getPkmAbilities(responseToJson),
         "stats": await getPkmStats(responseToJson),
-        "height": await responseToJson.height,
-        "weight": await responseToJson.weight,
-        "bgColor": await responseToJson.types[0].type.name,
+        "height": responseToJson.height,
+        "weight": responseToJson.weight,
+        "bgColor": responseToJson.types[0].type.name,
         "img": await getPkmImg(currentNum),
     }
     return currentPkmDetails

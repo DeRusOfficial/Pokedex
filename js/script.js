@@ -11,15 +11,21 @@ const loadMoreBtn = document.querySelector('[data-id=load-more-button]');
 
 async function init() {
     activateLoadingScreen()
-    for (currentNum; currentNum <= endNum; currentNum++) {
-        await render(currentNum);
+    try {
+        for (currentNum; currentNum <= endNum; currentNum++) {
+            await render(currentNum);
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        deactivateLoadingScreen();
     }
-    deactivateLoadingScreen()
 }
 
 async function render(currentNum) {
     await loadToLocalStorage(currentNum);
-    loadCard(currentNum);
+    let pokemon = JSON.parse(localStorage.listOfPkms);
+    loadCard(currentNum, pokemon);
 }
 
 async function loadToLocalStorage(currentNum) {

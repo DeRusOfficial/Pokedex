@@ -3,9 +3,9 @@ async function getCurrentPkmDetails(currentNum) {
     currentPkmDetails[currentNum] = {
         "id": await responseToJson.id,
         "name": capitalizeFirstLetters(await responseToJson.name),
-        "types": await getPkmTypes(currentNum),
-        "abilities": await getPkmAbilities(currentNum),
-        "stats": await getPkmStats(currentNum),
+        "types": await getPkmTypes(responseToJson),
+        "abilities": await getPkmAbilities(responseToJson),
+        "stats": await getPkmStats(responseToJson),
         "height": await responseToJson.height,
         "weight": await responseToJson.weight,
         "bgColor": await responseToJson.types[0].type.name,
@@ -14,8 +14,7 @@ async function getCurrentPkmDetails(currentNum) {
     return currentPkmDetails
 }
 
-async function getPkmTypes(currentNum) {
-    let responseToJson = await fetchPkmAPI(currentNum);
+async function getPkmTypes(responseToJson) {
     const arrOfPkmTypes = [];
     for (let i = 0; i < responseToJson.types.length; i++) {
         arrOfPkmTypes.push(responseToJson.types[i].type.name)
@@ -23,8 +22,7 @@ async function getPkmTypes(currentNum) {
     return arrOfPkmTypes
 }
 
-async function getPkmAbilities(currentNum) {
-    let responseToJson = await fetchPkmAPI(currentNum);
+async function getPkmAbilities(responseToJson) {
     let arrOfPkmAbilities = [];
     for (let i = 0; i < responseToJson.abilities.length; i++) {
         arrOfPkmAbilities += `<tr><td class="font-montserrat">${responseToJson.abilities[i].ability.name}</td></tr>`
@@ -32,8 +30,7 @@ async function getPkmAbilities(currentNum) {
     return arrOfPkmAbilities
 }
 
-async function getPkmStats(currentNum) {
-    let responseToJson = await fetchPkmAPI(currentNum);
+async function getPkmStats(responseToJson) {
     let arrOfPkmStats = [];
     for (let i = 0; i < responseToJson.stats.length; i++) {
         arrOfPkmStats += `

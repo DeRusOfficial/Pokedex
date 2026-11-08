@@ -1,6 +1,3 @@
-//These functions i took in a seperate .js file, because the user active can handle or see what is happening by clicking on something
-
-
 function loadMorePkm() {
     endNum = endNum + 20;
     init();
@@ -22,7 +19,8 @@ async function searchPkm() {
 }
 
 async function lookForSearchedPkm(searchedPkm) {
-    for (let i = 1; i <= await getQuantityOfPkms(); i++) {
+    let quantityOfPkms = await getQuantityOfPkms();
+    for (let i = 1; i <= quantityOfPkms; i++) {
         let responseToJson = await fetchPkmAPI(i);
         if ((convertLetterToLowerCase(responseToJson.name)).includes(searchedPkm)) {
             render(i);
@@ -36,9 +34,7 @@ async function lookForSearchedPkm(searchedPkm) {
 }
 
 function activateLoadingScreen() {
-    content.inert = true; //If inert is true, the user can't focus on other elements at the background while 
-    inputValue.readOnly = true; //If readOnly is true, the user can't write or tip something in the inputField while the loadingScreen is active
-    loadingOverlay.style.display = 'flex';
+    content.inert = true;
     document.body.classList.add('no-scroll')
 }
 
@@ -75,16 +71,10 @@ function closePkmDetails() {
     dialogRef.style.display = 'none';
 }
 
-
-// Using REGEX to change only the first letter of each word - after a space or symbol like "-"
-// Structure of Regex-Literal: /PATTERN/FLAGS
-// \b - search for a beginning letter, a letter after a space or "-" ("_" REGEX treat it like a letter)
-// \w - search for the first letter after a boundary (/b) 
 function capitalizeFirstLetters(currentPkmName) {
     return currentPkmName.replace(/\b\w/g, char => char.toUpperCase());
 }
 
-// This is used so that the case (upper/lower case) does not matter during a search
 function convertLetterToLowerCase(currentPkmName) {
     return currentPkmName.toLowerCase()
 }

@@ -1,6 +1,10 @@
-function loadMorePkm() {
+async function loadMorePkm() {
     endNum = endNum + 20;
-    init();
+    currentNum;
+    for (currentNum; currentNum <= endNum; currentNum++) {
+        await loadToLocalStorage(currentNum);
+        await render(currentNum);
+    }
 }
 
 async function loadTypesOfPkm(currentNum, pokemon) {
@@ -34,7 +38,7 @@ async function searchPkm() {
     if ((inputValue.value.length <= 2) && ((content.innerHTML == '') || (content.children.length !== endNum))) {
         content.innerHTML = '';
         currentNum = 1;
-        init();
+        await loadCurrentPkms(currentNum);
         loadMoreBtn.classList.remove('hide-btn');
         loadMoreBtn.classList.add('show-btn');
     } else if (inputValue.value.length > 2) {
@@ -42,6 +46,12 @@ async function searchPkm() {
         loadMoreBtn.classList.remove('show-btn');
         loadMoreBtn.classList.add('hide-btn');
         await loadSearchedPkm(searchedPkm);
+    }
+}
+
+async function loadCurrentPkms(currentNum) {
+    for (currentNum; currentNum <= endNum; currentNum++) {
+        await render(currentNum)
     }
 }
 

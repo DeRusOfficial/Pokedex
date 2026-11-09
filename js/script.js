@@ -13,6 +13,7 @@ async function init() {
     activateLoadingScreen()
     try {
         for (currentNum; currentNum <= endNum; currentNum++) {
+            await loadToLocalStorage(currentNum);
             await render(currentNum);
         }
     } catch (error) {
@@ -23,7 +24,6 @@ async function init() {
 }
 
 async function render(currentNum) {
-    await loadToLocalStorage(currentNum);
     let pokemon = JSON.parse(localStorage.listOfPkms);
     loadCard(currentNum, pokemon);
 }

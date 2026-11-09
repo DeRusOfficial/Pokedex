@@ -33,12 +33,7 @@ async function getPkmAbilities(responseToJson) {
 async function getPkmStats(responseToJson) {
     let arrOfPkmStats = [];
     for (let i = 0; i < responseToJson.stats.length; i++) {
-        arrOfPkmStats += `
-            <tr>
-                <th class="font-montserrat">${responseToJson.stats[i].stat.name}</th>
-                <td class="font-silkscreen">${responseToJson.stats[i].base_stat}</td>
-            </tr>
-        `
+        arrOfPkmStats += returnPkmStats(responseToJson, i)
     }
     return arrOfPkmStats
 }

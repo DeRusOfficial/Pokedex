@@ -71,4 +71,13 @@ function tableTemplateOfDetails(currentNum, pokemon) {
             </tr>
         </table>
     `
-}   
+}
+
+function returnPkmStats(responseToJson, i) {
+    return `
+        <tr>
+            <th class="font-montserrat">${responseToJson.stats[i].stat.name}</th>
+            <td class="font-silkscreen">${responseToJson.stats[i].base_stat}</td>
+        </tr>
+    `
+}

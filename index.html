@@ -35,11 +35,11 @@
 
     </main>
 
-    <button aria-label="Load more pokemons" data-id="load-more-button" id="load-more-button" onclick="loadMorePkm()">Load more Pokemons</button>
+    <button aria-label="Load more pokemons" data-id="load-more-button" id="load-more-button" class="show-btn" onclick="loadMorePkm()">Load more Pokemons</button>
 
     <dialog data-id="dialog" id="pkmDialog" aria-labelledby="pkmName" onclick="closeDialog()"> </dialog>
 
-    <div id="loadingOverlay" aria-modal="loading-overlay">
+    <div id="loadingOverlay" aria-modal="loading-overlay" class="close-loading-screen">
         <div id="loadingSpinner" role="status" aria-live="assertive">
             <div class="dots">
                 <div class="circle"></div>

@@ -6,7 +6,6 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -56,6 +55,14 @@
     background: linear-gradient(rgba(66,0,29,.03),rgba(66,0,29,.03)) padding-box,linear-gradient(to right,rgba(66,0,29,.07) 0,rgba(66,0,29,.05) 40%,rgba(66,0,29,0) 100%) border-box;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px)
+}
+
+.show-loading-screen {
+    display: flex;
+}
+
+.hide-loading-screen {
+    display: none;
 }
 
 .no-scroll {

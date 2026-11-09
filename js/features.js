@@ -46,10 +46,12 @@ async function searchPkm() {
         content.innerHTML = '';
         currentNum = 1;
         init();
-        loadMoreBtn.style.display = 'flex';
+        loadMoreBtn.classList.remove('hide-btn');
+        loadMoreBtn.classList.add('show-btn');
     } else if (inputValue.value.length > 2) {
         content.innerHTML = '';
-        loadMoreBtn.style.display = 'none';
+        loadMoreBtn.classList.remove('show-btn');
+        loadMoreBtn.classList.add('hide-btn');
         await loadSearchedPkm(searchedPkm);
     }
 }
@@ -82,14 +84,16 @@ async function lookForSearchedPkm(searchedPkm) {
 function activateLoadingScreen() {
     content.inert = true;
     inputValue.readOnly = true;
-    loadingOverlay.style.display = 'flex';
+    loadingOverlay.classList.add('show-loading-screen');
+    loadingOverlay.classList.remove('hide-loading-screen');
     document.body.classList.add('no-scroll');
 }
 
 function deactivateLoadingScreen() {
     content.inert = false;
     inputValue.readOnly = false;
-    loadingOverlay.style.display = 'none';
+    loadingOverlay.classList.remove('show-loading-screen');
+    loadingOverlay.classList.add('hide-loading-screen');
     document.body.classList.remove('no-scroll');
 }
 

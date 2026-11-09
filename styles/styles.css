@@ -38,7 +38,6 @@ body {
     background-color: white;
     border: none;
 
-    display: flex;
     justify-content: center;
     align-items: center;
 
@@ -49,6 +48,14 @@ body {
 #load-more-button:hover {
     background-color: brown;
     color: white;
+}
+
+.show-btn {
+    display: flex;
+}
+
+.hide-btn {
+    display: none;
 }
 
 

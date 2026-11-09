@@ -25,7 +25,7 @@ async function getPkmTypes(responseToJson) {
 async function getPkmAbilities(responseToJson) {
     let arrOfPkmAbilities = [];
     for (let i = 0; i < responseToJson.abilities.length; i++) {
-        arrOfPkmAbilities += `<tr><td class="font-montserrat">${responseToJson.abilities[i].ability.name}</td></tr>`
+        arrOfPkmAbilities += `<td class="font-montserrat">${responseToJson.abilities[i].ability.name}</td>`
     }
     return arrOfPkmAbilities
 }
@@ -46,10 +46,4 @@ async function getPkmStats(responseToJson) {
 async function getPkmImg(currentNum) {
     let pkmImg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentNum}.svg`;
     return pkmImg
-}
-
-async function getQuantityOfPkms() {
-    let pkmQuantity = await fetch('https://pokeapi.co/api/v2/pokemon-species');
-    let pkmQuantityJson = await pkmQuantity.json()
-    return pkmQuantityJson.count
 }

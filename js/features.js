@@ -19,7 +19,11 @@ async function loadPkmDetails(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);
     await currentNum;
     detailsField[0].innerHTML = '';
-    detailsField[0].innerHTML = tableTemplateOfDetails(currentNum, pokemon);
+    detailsField[0].innerHTML = `
+        <table class="details__infos_field-details">
+            ${tableTemplateOfDetails(currentNum, pokemon)}
+        </table>
+    `
     addUnderlineAtDetails();
 }
 
@@ -62,14 +66,13 @@ async function loadSearchedPkm(searchedPkm) {
 }
 
 async function lookForSearchedPkm(searchedPkm) {
-    let quantityOfPkms = await getQuantityOfPkms();
-    for (let i = 1; i <= quantityOfPkms; i++) {
-        let responseToJson = await fetchPkmAPI(i);
-        if ((convertLetterToLowerCase(responseToJson.name)).includes(searchedPkm)) {
-            render(i);
-        }
+    for (let i = 1; i <= endNum; i++) {
+        let pokemon = JSON.parse(localStorage.listOfPkms);
+        if ((convertLetterToLowerCase(pokemon.pokemon[i].name)).includes(searchedPkm)) {
+            await render(i);
+        } 
     }
-    if (content.innerHTML == '') {
+    if (content.children.length === 0) {
         content.innerHTML = `
             <p data-id="not-found" aria-errormessage="Searched Pokemon couldn't be found" >Pokemon "${searchedPkm}" could not be found. Please try again using a different spelling.</p>
         `

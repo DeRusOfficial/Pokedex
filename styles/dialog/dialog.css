@@ -131,9 +131,21 @@ dialog::backdrop {
     font-weight: 500;
 }
 
-.details__infos_field {
-    display: flex;
-    justify-content: center;
+.details__infos_field-details tr {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 24px;
+}
+
+.details__infos_field-details th {
+    grid-column: 1;
+    text-align: left;
+    width: 64px;
+}
+
+.details__infos_field-details td {
+    grid-column: 2;
+    display: block;
 }
 
 .details__infos_field-stats tr {

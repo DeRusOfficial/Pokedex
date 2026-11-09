@@ -47,19 +47,17 @@ function loadPkmDialog(currentNum, pokemon) {
 
 function tableTemplateOfDetails(currentNum, pokemon) {
     return `
-        <table>
-            <tr>
-                <th class="font-montserrat td-fw-500">Abilities</th>
-            </tr>
-                ${pokemon.pokemon[currentNum].abilities}
-            <tr>
-                <th class="font-montserrat td-fw-500">Height</th>
-                <td class="font-silkscreen">${pokemon.pokemon[currentNum].height}</td>
-            </tr>
-            <tr>
-                <th class="font-montserrat td-fw-500">Weight</th>
-                <td class="font-silkscreen">${pokemon.pokemon[currentNum].weight}</td>
-            </tr>
-        </table>
+        <tr>
+            <th class="font-montserrat td-fw-500">Abilities</th>
+            ${pokemon.pokemon[currentNum].abilities}
+        </tr>
+        <tr>
+            <th class="font-montserrat td-fw-500">Height</th>
+            <td class="font-silkscreen">${pokemon.pokemon[currentNum].height}</td>
+        </tr>
+        <tr>
+            <th class="font-montserrat td-fw-500">Weight</th>
+            <td class="font-silkscreen">${pokemon.pokemon[currentNum].weight}</td>
+        </tr>
     `
 }   

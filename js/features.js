@@ -1,10 +1,12 @@
 async function loadMorePkm() {
     endNum = endNum + 20;
     currentNum = endNum - 19;
+    activateLoadingScreen();
     for (currentNum; currentNum <= endNum; currentNum++) {
         await loadToLocalStorage(currentNum);
         await render(currentNum);
     }
+    deactivateLoadingScreen();
 }
 
 async function loadTypesOfPkm(currentNum, pokemon) {

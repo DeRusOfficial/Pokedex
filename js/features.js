@@ -5,12 +5,7 @@ function loadMorePkm() {
 
 async function loadTypesOfPkm(currentNum, pokemon) {
     for (let i = 0; i < pokemon.pokemon[currentNum].types.length; i++) {
-        document.getElementById(`pkm-card__types-${await currentNum}`).innerHTML += `
-                <div class="pkm-card__types_details">
-                    <div class="pkm-card__types_details-name font-montserrat">${pokemon.pokemon[currentNum].types[i]}</div>
-                    <img class="pkm-card__types_details-icon" src="./assets/icons/types/${pokemon.pokemon[currentNum].types[i]}.svg" alt="${pokemon.pokemon[currentNum].types[i]}.svg">
-                </div>
-            `
+        document.getElementById(`pkm-card__types-${await currentNum}`).innerHTML += returnTypesOfPkm(pokemon, currentNum, i);
     }
 }
 
@@ -19,11 +14,7 @@ async function loadPkmDetails(currentNum) {
     let pokemon = JSON.parse(localStorage.listOfPkms);
     await currentNum;
     detailsField[0].innerHTML = '';
-    detailsField[0].innerHTML = `
-        <table class="details__infos_field-details">
-            ${tableTemplateOfDetails(currentNum, pokemon)}
-        </table>
-    `
+    detailsField[0].innerHTML = tableTemplateOfDetails(currentNum, pokemon);
     addUnderlineAtDetails();
 }
 
@@ -33,9 +24,7 @@ async function loadPkmStats(currentNum) {
     await currentNum;
     detailsField[0].innerHTML = '';
     detailsField[0].innerHTML = `
-        <table class="details__infos_field-stats">
-            ${pokemon.pokemon[currentNum].stats}
-        </table>
+        <table class="details__infos_field-stats">${pokemon.pokemon[currentNum].stats}</table>
     `;
     addUnderlineAtStats();
 }

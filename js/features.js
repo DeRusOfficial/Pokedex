@@ -1,6 +1,6 @@
 async function loadMorePkm() {
     endNum = endNum + 20;
-    currentNum;
+    currentNum = endNum - 19;
     for (currentNum; currentNum <= endNum; currentNum++) {
         await loadToLocalStorage(currentNum);
         await render(currentNum);
